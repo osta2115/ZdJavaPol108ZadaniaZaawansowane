@@ -18,7 +18,6 @@ class Task9_10_11_Test {
 
     @Test
     void shouldReturnCorrectRadius() {
-        //given
         //when
         double result = circle.getRadius();
         //then

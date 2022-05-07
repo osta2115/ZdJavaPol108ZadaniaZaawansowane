@@ -7,8 +7,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Task2Test {
-    private final static List<String> UNSORTED = List.of("A", "B", "b", "Z", "d", "C");
-    private final static List<String> EXPECTED_RESULT = List.of("Z", "d", "C", "B", "b", "A");
+    private final static List<String> UNSORTED = List.of("A", "Z", "b", "z", "a", "C");
+    private final static List<String> EXPECTED_RESULT = List.of("Z", "z", "C", "b", "A", "a");
 
     @Test
     void shouldReverseListOfStringIgnoreCaseWithAnonymousClass() {
