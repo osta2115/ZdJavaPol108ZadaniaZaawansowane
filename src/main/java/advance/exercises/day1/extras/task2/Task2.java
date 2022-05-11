@@ -144,6 +144,7 @@ public class Task2 {
     public static Integer numberOfLanguagesKnownByFemaleProgrammers(List<Programmer> programmers) {
         return Math.toIntExact(programmers.stream()
                 .filter(programmer -> programmer.getPerson().getGender() == Gender.FEMALE)
+                .filter(programmer -> !programmer.getLanguages().isEmpty())
                 .map(Programmer::getLanguages)
                 .distinct()
                 .count());

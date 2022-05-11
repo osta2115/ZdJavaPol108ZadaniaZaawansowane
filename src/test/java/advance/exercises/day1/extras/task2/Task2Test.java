@@ -52,6 +52,7 @@ class Task2Test {
         fifthProgrammerList.add("Python");
 
 
+
         programmersList.add(programmer1);
         programmersList.add(programmer2);
         programmersList.add(programmer3);
@@ -126,7 +127,7 @@ class Task2Test {
     }
 
     @Test
-    void shouldReturnnumberOfLanguagesKnownByFemaleProgrammers() {
+    void shouldReturnNumberOfLanguagesKnownByFemaleProgrammers() {
         //when
         Integer actualResult = Task2.numberOfLanguagesKnownByFemaleProgrammers(programmersList);
         //then
