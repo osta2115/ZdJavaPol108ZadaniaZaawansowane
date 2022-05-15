@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 public class Task35 {
 
     public static void main(String[] args) {
-        Thread thread1 = new Thread(new MyRunnable());
-        Thread thread2 = new Thread(new MyRunnable());
+        Thread thread1 = new Thread(new MyRunnable("job1"));
+        Thread thread2 = new Thread(new MyRunnable("job2"));
         thread1.start();
         thread2.start();
         try {

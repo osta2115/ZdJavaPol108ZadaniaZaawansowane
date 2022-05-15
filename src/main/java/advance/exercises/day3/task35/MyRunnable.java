@@ -4,9 +4,15 @@ import java.util.Random;
 
 public class MyRunnable implements Runnable{
 
+    private String name;
+
+    public MyRunnable(String name) {
+        this.name = name;
+    }
+
     @Override
     public void run() {
-        String name = Thread.currentThread().getName();
+        //String name = Thread.currentThread().getName();
         System.out.printf("%s - Rozpoczynam pracę \n", name);
         System.out.println();
         while (!Thread.interrupted()){
