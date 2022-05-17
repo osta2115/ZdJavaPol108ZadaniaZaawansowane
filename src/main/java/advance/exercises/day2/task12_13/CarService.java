@@ -74,10 +74,9 @@ public class CarService {
     }
 
     //point10
-//    public boolean isCarOnList(Car car) {
-//        return cars.stream()
-//                .findAny(car)
-//    }
+    public boolean isCarOnList(Car car) {
+        return cars.contains(car);
+    }
 
     //point11
     public List<Car> getCarsFromManufacturer(Manufacturer manufacturer) {
