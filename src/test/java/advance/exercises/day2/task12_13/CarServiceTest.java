@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -56,17 +57,168 @@ class CarServiceTest {
                 List.of(manufacturer4),
                 EngineType.V8);
 
-        carService = (CarService) List.of(car1, car2, car3, car4);
+        carService.add(car1);
+        carService.add(car2);
+        carService.add(car3);
+        carService.add(car4);
     }
 
     @Test
-    void shouldAddCarToList() {
+    void point3Test() {
         //given
 
         //when
-        carService.add(car1);
+        List<Car> result = carService.getAll();
         //then
-        assertThat(carService).isEqualTo(5);
+        assertThat(result).containsExactlyInAnyOrder(car1, car2, car3, car4);
     }
+
+    @Test
+    void point4Test() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsWithV12Engine();
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car1);
+    }
+
+    @Test
+    void point5Test() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsProducedBefore1999();
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car4);
+    }
+
+    @Test
+    void point6Test() {
+        //given
+
+        //when
+        Optional<Car> result = carService.getMostExpensiveCar();
+        //then
+        assertThat(result).containsSame(car1);
+    }
+    @Test
+    void point7Test() {
+        //given
+
+        //when
+        Optional<Car> result = carService.getTheCheapestCar();
+        //then
+        assertThat(result).containsSame(car3);
+    }
+
+    @Test
+    void point8Test_1() {
+        //given
+        Car testCar = new Car("Car to test", "With three manufacturers",
+                2_000, 2022,
+                List.of(manufacturer1,manufacturer2,manufacturer3), EngineType.S3);
+        carService.add(testCar);
+        //when
+        List<Car> result = carService.getCarsWithAtLeastThreeManufacturers();
+        //then
+        assertThat(result).containsExactlyInAnyOrder(testCar);
+    }
+
+    @Test
+    void point8Test_2() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsWithAtLeastThreeManufacturers();
+        //then
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void point9TestAscending() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsSortedByName(true);
+        //then
+        assertThat(result).containsExactly(car2, car1, car3, car4);
+    }
+
+    @Test
+    void point9TestDescending() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsSortedByName(false);
+        //then
+        assertThat(result).containsExactly(car4, car3, car1, car2);
+    }
+
+    @Test
+    void point10Test_1() {
+        //given
+
+        //when
+        boolean result = carService.isCarOnList(car1);
+        //then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void point10Test_2() {
+        //given
+        Car testCar = new Car("Car to test", "With three manufacturers",
+                2_000, 2022,
+                List.of(manufacturer1,manufacturer2,manufacturer3), EngineType.S3);
+        //when
+        boolean result = carService.isCarOnList(testCar);
+        //then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void point11Test() {
+        //given
+
+        //when
+        List<Car> result = carService.getCarsFromManufacturer(manufacturer4);
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car3, car4);
+    }
+
+    @Test
+    void point12TestGreaterThan() {
+        //given
+        Operation operation = Operation.GREATER_THAN;
+        int founded = 1905;
+        //when
+        List<Car> result = carService.getCarsFoundedBy(founded, operation);
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car2, car3, car4);
+    }
+
+    @Test
+    void point12TestLessThan() {
+        //given
+        Operation operation = Operation.LESS_THAN;
+        int founded = 1905;
+        //when
+        List<Car> result = carService.getCarsFoundedBy(founded, operation);
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car1);
+    }
+
+    @Test
+    void point12TestEqual() {
+        //given
+        Operation operation = Operation.EQUAL;
+        int founded = 1916;
+        //when
+        List<Car> result = carService.getCarsFoundedBy(founded, operation);
+        //then
+        assertThat(result).containsExactlyInAnyOrder(car3, car4);
+    }
+
 
 }
